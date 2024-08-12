@@ -22,6 +22,6 @@ public class AgentAmountLabel : MonoBehaviour
 
     public void UpdateCounter()
     {
-        label.text = IAgentService.agentsNumber.ToString();
+        label.text = IAgentService.agents.Count.ToString();
     }
 }

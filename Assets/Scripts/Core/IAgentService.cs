@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +13,7 @@ public interface IAgentService
     public static OnAgentClear onAgentClear;
 
     public static int agentsNumber { get; set; }
-    public static List<Guid> agentsGuids = new List<Guid>();
+    public static List<GameObject> agents = new List<GameObject>();
 
     void RequestAgentSpawn();
     void RequestAgentDestroy();

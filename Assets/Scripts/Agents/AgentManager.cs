@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class AgentManager : MonoBehaviour
 {
     //Setting up a pool to avoid the performance hit of endlessly instantiating and destroying agents :)
     public ObjectPool<Agent> poolAgents;
+    public Agent agentPrefab;
+    public Vector3 agentSpawnPos;
 
     private void OnEnable()
     {
@@ -36,27 +39,71 @@ public class AgentManager : MonoBehaviour
         IAgentService.onAgentClear?.Invoke();
         ITickService.onTickReset?.Invoke();
         ITickService.isPaused = false;
+
+        poolAgents = new ObjectPool<Agent>(CreateAgent, OnTakeAgentFromPool, OnReturnAgentToPool, OnDestroyAgent, true, 50, 150);
     }
 
+    #region Pool Setup
+    private Agent CreateAgent()
+    {
+        Agent agent = Instantiate(agentPrefab, agentSpawnPos, transform.rotation);
+        agent.SetPool(poolAgents);
+        agent.agentID = Guid.NewGuid();
+        return agent;
+    }
+
+    private void OnTakeAgentFromPool(Agent agent)
+    {
+        agent.transform.position = agentSpawnPos;
+
+        agent.gameObject.SetActive(true);
+
+        IAgentService.agents.Add(agent.gameObject);
+    }
+
+    private void OnReturnAgentToPool(Agent agent)
+    {
+        agent.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyAgent(Agent agent)
+    {
+        Destroy(agent.gameObject);
+    }
+
+    #endregion
+
+    #region Agent Management
     public void SpawnAgent()
     {
         Debug.Log("Agent Manager attempting to spawn agents!");
-        IAgentService.agentsNumber++;
+        poolAgents.Get();
+        //IAgentService.agentsNumber++;
     }
 
     public void DestroyAgent()
     {
         Debug.Log("Agent Manager attempting to destroy a random agent!");
-        if (IAgentService.agentsNumber <= 0) return;
-        IAgentService.agentsNumber--;
+        if (IAgentService.agents.Count <= 0) return;
+        int r = UnityEngine.Random.Range(0, IAgentService.agentsNumber);
+        IAgentService.agents[r].GetComponent<Agent>().RemoveThisAgent();
+        IAgentService.agents.RemoveAt(r);
+        //IAgentService.agentsNumber--;
     }
 
     public void ClearAgents()
     {
         Debug.Log("Agent Manager attempting to clear agents!");
-        IAgentService.agentsNumber = 0;
+        foreach (GameObject obj in IAgentService.agents)
+        {
+            obj.GetComponent<Agent>().RemoveThisAgent();
+        }
+        IAgentService.agents.Clear();
+        //IAgentService.agentsNumber = 0;
     }
+    #endregion
 
+    #region Tickrate Management
     public void IncreaseTick()
     {
         Debug.Log("Agent Manager attempting to increase the tick rate!");
@@ -82,4 +129,5 @@ public class AgentManager : MonoBehaviour
         Debug.Log("Agent Manager attempting to toggle pause!");
         ITickService.isPaused = !ITickService.isPaused;
     }
+    #endregion
 }
