@@ -1,7 +1,5 @@
-using CodiceApp.EventTracking.Plastic;
 using DG.Tweening;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -110,14 +108,22 @@ public class AgentManager : MonoBehaviour
     #region Tickrate Management
     public void IncreaseTick()
     {
-        if (ITickService.currentTickRate >= 5) return;
+        if (ITickService.currentTickRate >= 5)
+        {
+            ILogService.onTickAboveLimit?.Invoke();
+            return;
+        }
         ITickService.currentTickRate++;
         DOTween.timeScale = ITickService.currentTickRate;
     }
 
     public void DecreaseTick() 
     {
-        if (ITickService.currentTickRate <= 1) return;
+        if (ITickService.currentTickRate <= 1)
+        {
+            ILogService.onTickBelowLimit?.Invoke();
+            return;
+        }
         ITickService.currentTickRate--;
         DOTween.timeScale = ITickService.currentTickRate;
     }
