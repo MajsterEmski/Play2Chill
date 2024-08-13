@@ -12,7 +12,6 @@ public interface IAgentService
     public static OnAgentDestroy onAgentDestroy;
     public static OnAgentClear onAgentClear;
 
-    public static int agentsNumber { get; set; }
     public static List<GameObject> agents = new List<GameObject>();
 
     void RequestAgentSpawn();
