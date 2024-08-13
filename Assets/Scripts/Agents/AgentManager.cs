@@ -1,8 +1,7 @@
+using CodiceApp.EventTracking.Plastic;
 using DG.Tweening;
-using Pathfinding;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -52,6 +51,7 @@ public class AgentManager : MonoBehaviour
         Agent agent = Instantiate(agentPrefab, agentSpawnPos, transform.rotation);
         agent.SetPool(poolAgents);
         agent.agentID = Guid.NewGuid();
+        agent.agentManager = this;
         return agent;
     }
 
@@ -98,6 +98,14 @@ public class AgentManager : MonoBehaviour
         IAgentService.agents.Clear();
     }
     #endregion
+
+    #region UI
+    public void LogDestinationReached(Guid id)
+    {
+        ILogService.onDestinationReached.Invoke(id);
+    }
+    #endregion
+
 
     #region Tickrate Management
     public void IncreaseTick()

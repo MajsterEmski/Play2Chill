@@ -4972,13 +4972,14 @@ GameObject:
   - component: {fileID: 703312163}
   - component: {fileID: 703312165}
   - component: {fileID: 703312164}
+  - component: {fileID: 703312166}
   m_Layer: 5
   m_Name: LogMessageTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &703312163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4994,10 +4995,10 @@ RectTransform:
   m_Father: {fileID: 1760036663}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 280, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 155, y: -93.53}
+  m_SizeDelta: {x: 300, y: 24.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &703312164
 MonoBehaviour:
@@ -5019,7 +5020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Destination reached by Agent XYZ
+  m_text: Destination reached by Agent XYZ Destination reached by Agent XYZ
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5046,15 +5047,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5096,6 +5097,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703312162}
   m_CullTransparentMesh: 1
+--- !u!114 &703312166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703312162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &755410199
 GameObject:
   m_ObjectHideFlags: 0
@@ -11808,6 +11823,8 @@ GameObject:
   - component: {fileID: 1760036666}
   - component: {fileID: 1760036665}
   - component: {fileID: 1760036664}
+  - component: {fileID: 1760036667}
+  - component: {fileID: 1760036668}
   m_Layer: 0
   m_Name: Log
   m_TagString: Untagged
@@ -11900,6 +11917,33 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1760036667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760036662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e633d83f3c771754aa2d4465b6cc396d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logMessagesContainer: {fileID: 1760036663}
+  logMessagesTemplate: {fileID: 703312162}
+--- !u!114 &1760036668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760036662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1768636091
 GameObject:
   m_ObjectHideFlags: 0

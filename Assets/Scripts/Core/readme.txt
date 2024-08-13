@@ -1,0 +1,1 @@
+Made the core scripts interfaces to keep true to the naming convention.

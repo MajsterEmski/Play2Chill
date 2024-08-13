@@ -16,6 +16,7 @@ public class Agent : MonoBehaviour
     private bool isMoving;
     private float speed = 1;
     private Vector3 target;
+    public AgentManager agentManager;
 
     private void Update()
     {
@@ -27,6 +28,7 @@ public class Agent : MonoBehaviour
         }
         if (target == transform.position)
         {
+            agentManager.LogDestinationReached(agentID);
             isMoving = false;
         }
     }
